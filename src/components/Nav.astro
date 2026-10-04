@@ -1,0 +1,24 @@
+---
+import ThemeToggle from './ThemeToggle.astro';
+---
+
+<nav aria-label="Main">
+  <a href="/">Home</a>
+  <a href="/projects">Projects</a>
+  <a href="/blog">Blog</a>
+  <a href="/tutorials">Tutorials</a>
+  <a href="/thoughts">Thoughts</a>
+  <a href="/tags">Tags</a>
+  <a href="/bookmarks">Bookmarks</a>
+  <ThemeToggle />
+</nav>
+
+<style>
+  nav {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    padding: 1rem;
+    border-bottom: 1px solid var(--color-border);
+  }
+</style>

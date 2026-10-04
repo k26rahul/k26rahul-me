@@ -1,0 +1,35 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+export async function getStaticPaths() {
+  const notDraft = ({ data }) => !data.draft;
+  const blog = (await getCollection('blog', notDraft)).map((e) => ({ ...e, section: 'blog' }));
+  const tutorials = (await getCollection('tutorials', notDraft)).map((e) => ({ ...e, section: 'tutorials' }));
+  const entries = [...blog, ...tutorials];
+
+  const tags = new Set(entries.flatMap((e) => e.data.tags));
+  return [...tags].map((tag) => ({
+    params: { tag },
+    props: { entries: entries.filter((e) => e.data.tags.includes(tag)) },
+  }));
+}
+
+const { tag } = Astro.params;
+const { entries } = Astro.props;
+---
+
+<BaseLayout title={`#${tag}`} description={`Entries tagged ${tag}.`}>
+  <h1>#{tag}</h1>
+  <ul>
+    {
+      entries
+        .sort((a, b) => b.data.pubDate - a.data.pubDate)
+        .map((e) => (
+          <li>
+            <a href={`/${e.section}/${e.id}`}>{e.data.title}</a> ({e.section})
+          </li>
+        ))
+    }
+  </ul>
+</BaseLayout>

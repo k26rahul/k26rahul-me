@@ -1,0 +1,23 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import TagList from '../../components/TagList.astro';
+
+const thoughts = (await getCollection('thoughts')).sort((a, b) => b.data.pubDate - a.data.pubDate);
+---
+
+<BaseLayout title="Thoughts" description="Short, quick observations.">
+  <h1>Thoughts</h1>
+  <ul>
+    {
+      thoughts.map((t) => (
+        <li>
+          <a href={`/thoughts/${t.id}`}>
+            <time datetime={t.data.pubDate.toISOString()}>{t.data.pubDate.toISOString().slice(0, 16).replace('T', ' ')}</time>
+          </a>
+          <TagList tags={t.data.tags} />
+        </li>
+      ))
+    }
+  </ul>
+</BaseLayout>

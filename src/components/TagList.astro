@@ -1,0 +1,26 @@
+---
+const { tags = [] } = Astro.props;
+---
+
+{
+  tags.length > 0 && (
+    <ul class="tags">
+      {tags.map((tag) => (
+        <li>
+          <a href={`/tags/${encodeURIComponent(tag)}`}>#{tag}</a>
+        </li>
+      ))}
+    </ul>
+  )
+}
+
+<style>
+  .tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+</style>

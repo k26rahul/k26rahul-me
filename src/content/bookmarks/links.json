@@ -1,1 +1,15 @@
-[]
+[
+  {
+    "id": "sunflower-care",
+    "title": "Sunflower Care Guide",
+    "url": "https://example.com/sunflower-care",
+    "note": "Lorem ipsum, for sunny days.",
+    "tags": ["radiant"]
+  },
+  {
+    "id": "rain-notes",
+    "title": "Notes on Rain",
+    "url": "https://example.com/rain-notes",
+    "tags": ["serene", "resilient"]
+  }
+]

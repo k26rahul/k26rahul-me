@@ -1,0 +1,11 @@
+.demo {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem;
+  border: 1px solid var(--color-border);
+}
+
+.count {
+  font-weight: 600;
+}

@@ -1,0 +1,23 @@
+---
+import BaseLayout from './BaseLayout.astro';
+import TagList from '../components/TagList.astro';
+
+const { title, description, pubDate, updatedDate, tags = [], heroImage } = Astro.props;
+const fmt = (d) => d.toISOString().slice(0, 10);
+const showUpdated = updatedDate && fmt(updatedDate) !== fmt(pubDate);
+---
+
+<BaseLayout title={title} description={description}>
+  <article>
+    <h1>{title}</h1>
+    <p>
+      <time datetime={pubDate.toISOString()}>{fmt(pubDate)}</time>
+      {showUpdated && <span> (updated <time datetime={updatedDate.toISOString()}>{fmt(updatedDate)}</time>)</span>}
+    </p>
+    <TagList tags={tags} />
+    {heroImage && <img class="hero-image" src={heroImage} alt="" />}
+    <div class="prose">
+      <slot />
+    </div>
+  </article>
+</BaseLayout>

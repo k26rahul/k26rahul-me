@@ -1,0 +1,21 @@
+---
+import { getCollection } from 'astro:content';
+import PageLayout from '../layouts/PageLayout.astro';
+import TagList from '../components/TagList.astro';
+
+const links = await getCollection('bookmarks');
+---
+
+<PageLayout title="Bookmarks" description="Curated links.">
+  <ul>
+    {
+      links.map(({ data }) => (
+        <li>
+          <a href={data.url}>{data.title}</a>
+          {data.note && <p>{data.note}</p>}
+          <TagList tags={data.tags} />
+        </li>
+      ))
+    }
+  </ul>
+</PageLayout>

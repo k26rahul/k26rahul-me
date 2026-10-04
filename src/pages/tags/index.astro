@@ -1,0 +1,29 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+const notDraft = ({ data }) => !data.draft;
+const entries = [
+  ...(await getCollection('blog', notDraft)),
+  ...(await getCollection('tutorials', notDraft)),
+];
+
+const counts = new Map();
+for (const { data } of entries) {
+  for (const tag of data.tags) counts.set(tag, (counts.get(tag) ?? 0) + 1);
+}
+const tags = [...counts.entries()].sort(([a], [b]) => a.localeCompare(b));
+---
+
+<BaseLayout title="Tags" description="All tags across blog posts and tutorials.">
+  <h1>Tags</h1>
+  <ul>
+    {
+      tags.map(([tag, count]) => (
+        <li>
+          <a href={`/tags/${encodeURIComponent(tag)}`}>#{tag}</a> ({count})
+        </li>
+      ))
+    }
+  </ul>
+</BaseLayout>
