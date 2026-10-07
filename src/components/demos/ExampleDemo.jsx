@@ -2,14 +2,14 @@ import { useState } from 'react';
 import styles from './ExampleDemo.module.css';
 
 export default function ExampleDemo() {
-  const [petals, setPetals] = useState(0);
+  const [count, setCount] = useState(0);
 
   return (
     <div className={styles.demo}>
-      <button type="button" onClick={() => setPetals(petals + 1)}>
-        Add a petal
+      <button type="button" onClick={() => setCount(count + 1)}>
+        Increment counter
       </button>
-      <span className={styles.count}>Petals: {petals}</span>
+      <span className={styles.count}>Count: {count}</span>
     </div>
   );
 }

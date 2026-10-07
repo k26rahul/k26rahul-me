@@ -1,15 +1,15 @@
 [
   {
-    "id": "sunflower-care",
-    "title": "Sunflower Care Guide",
-    "url": "https://example.com/sunflower-care",
-    "note": "Lorem ipsum, for sunny days.",
-    "tags": ["radiant"]
+    "id": "example-1",
+    "title": "Example Resource 1",
+    "url": "https://example.com/1",
+    "note": "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+    "tags": ["reference"]
   },
   {
-    "id": "rain-notes",
-    "title": "Notes on Rain",
-    "url": "https://example.com/rain-notes",
-    "tags": ["serene", "resilient"]
+    "id": "example-2",
+    "title": "Example Resource 2",
+    "url": "https://example.com/2",
+    "tags": ["reference"]
   }
 ]
