@@ -1,0 +1,26 @@
+---
+const { topics = [] } = Astro.props;
+---
+
+{
+  topics.length > 0 && (
+    <ul class="topics">
+      {topics.map((topic) => (
+        <li>
+          <a href={`/topics/${encodeURIComponent(topic)}`}>#{topic}</a>
+        </li>
+      ))}
+    </ul>
+  )
+}
+
+<style>
+  .topics {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+</style>

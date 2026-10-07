@@ -6,32 +6,28 @@ const byDate = (a, b) => b.data.pubDate - a.data.pubDate;
 const notDraft = ({ data }) => !data.draft;
 
 const blog = (await getCollection('blog', notDraft)).sort(byDate).slice(0, 3);
-const tutorials = (await getCollection('tutorials', notDraft)).sort(byDate).slice(0, 3);
-const projects = (await getCollection('projects', notDraft)).sort(byDate).slice(0, 3);
-const thoughts = (await getCollection('thoughts')).sort(byDate).slice(0, 3);
+const projects = (await getCollection('projects')).slice(0, 3);
 ---
 
-<BaseLayout title="Home" description="Portfolio, tutorials, blog and thoughts by Rahul.">
+<BaseLayout title="Home" description="Portfolio and blog by Rahul.">
   <h1>Rahul</h1>
   <p>Student of Data Science and Applications. Studying machine learning, deep learning and web development.</p>
 
   <h2>Projects</h2>
   <ul>
-    {projects.map((p) => <li><a href={`/projects/${p.id}`}>{p.data.title}</a></li>)}
+    {
+      projects.map(({ data }) => (
+        <li>
+          <strong>{data.title}</strong> - {data.description}
+          {data.liveUrl && <> (<a href={data.liveUrl}>demo</a>)</>}
+          {data.repoUrl && <> (<a href={data.repoUrl}>code</a>)</>}
+        </li>
+      ))
+    }
   </ul>
 
   <h2>Latest blog posts</h2>
   <ul>
     {blog.map((p) => <li><a href={`/blog/${p.id}`}>{p.data.title}</a></li>)}
-  </ul>
-
-  <h2>Latest tutorials</h2>
-  <ul>
-    {tutorials.map((p) => <li><a href={`/tutorials/${p.id}`}>{p.data.title}</a></li>)}
-  </ul>
-
-  <h2>Latest thoughts</h2>
-  <ul>
-    {thoughts.map((t) => <li><a href={`/thoughts/${t.id}`}>{t.id}</a></li>)}
   </ul>
 </BaseLayout>

@@ -1,0 +1,26 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+const notDraft = ({ data }) => !data.draft;
+const entries = await getCollection('blog', notDraft);
+
+const counts = new Map();
+for (const { data } of entries) {
+  for (const topic of data.tags) counts.set(topic, (counts.get(topic) ?? 0) + 1);
+}
+const topics = [...counts.entries()].sort(([a], [b]) => a.localeCompare(b));
+---
+
+<BaseLayout title="Topics" description="All topics across blog posts.">
+  <h1>Topics</h1>
+  <ul>
+    {
+      topics.map(([topic, count]) => (
+        <li>
+          <a href={`/topics/${encodeURIComponent(topic)}`}>#{topic}</a> ({count})
+        </li>
+      ))
+    }
+  </ul>
+</BaseLayout>

@@ -1,0 +1,10 @@
+- id: example-project-1
+  title: Example Project 1
+  description: Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+  repoUrl: https://github.com/k26rahul/example-project-1
+  liveUrl: https://example.com/example-project-1
+
+- id: example-project-2
+  title: Example Project 2
+  description: Ut enim ad minim veniam classifier model.
+  repoUrl: https://github.com/k26rahul/example-project-2

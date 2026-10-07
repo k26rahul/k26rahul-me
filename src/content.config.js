@@ -1,7 +1,7 @@
 import { defineCollection, z } from 'astro:content';
 import { glob, file } from 'astro/loaders';
 
-// Shared by blog, tutorials and projects.
+// Shared by blog and projects.
 const postSchema = z.object({
   title: z.string(),
   description: z.string(),
@@ -20,26 +20,13 @@ const blog = defineCollection({
   schema: postSchema,
 });
 
-const tutorials = defineCollection({
-  loader: markdownLoader('./src/content/tutorials'),
-  schema: postSchema,
-});
-
 const projects = defineCollection({
-  loader: markdownLoader('./src/content/projects'),
-  schema: postSchema.extend({
+  loader: file('./src/content/projects/projects.yaml'),
+  schema: z.object({
+    title: z.string(),
+    description: z.string(),
     repoUrl: z.string().url().optional(),
     liveUrl: z.string().url().optional(),
-    techStack: z.array(z.string()).default([]),
-  }),
-});
-
-// No title: thoughts are quick posts with a timestamp-based slug.
-const thoughts = defineCollection({
-  loader: markdownLoader('./src/content/thoughts'),
-  schema: z.object({
-    pubDate: z.coerce.date(),
-    tags: z.array(z.string()).default([]),
   }),
 });
 
@@ -54,4 +41,4 @@ const bookmarks = defineCollection({
   }),
 });
 
-export const collections = { blog, tutorials, projects, thoughts, bookmarks };
+export const collections = { blog, projects, bookmarks };

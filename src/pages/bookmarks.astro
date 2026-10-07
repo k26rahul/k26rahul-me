@@ -1,7 +1,7 @@
 ---
 import { getCollection } from 'astro:content';
 import PageLayout from '../layouts/PageLayout.astro';
-import TagList from '../components/TagList.astro';
+import TopicList from '../components/TopicList.astro';
 
 const links = await getCollection('bookmarks');
 ---
@@ -13,7 +13,7 @@ const links = await getCollection('bookmarks');
         <li>
           <a href={data.url}>{data.title}</a>
           {data.note && <p>{data.note}</p>}
-          <TagList tags={data.tags} />
+          <TopicList topics={data.tags} />
         </li>
       ))
     }

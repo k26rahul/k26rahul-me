@@ -1,25 +1,26 @@
 ---
 import { getCollection } from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
-import TagList from '../../components/TagList.astro';
 
-const projects = (await getCollection('projects', ({ data }) => !data.draft)).sort(
-  (a, b) => b.data.pubDate - a.data.pubDate,
-);
+const projects = await getCollection('projects');
 ---
 
 <BaseLayout title="Projects" description="Selected projects.">
   <h1>Projects</h1>
   <ul>
     {
-      projects.map((p) => (
+      projects.map(({ data }) => (
         <li>
-          <a href={`/projects/${p.id}`}>{p.data.title}</a>
-          <p>{p.data.description}</p>
-          <p>{p.data.techStack.join(', ')}</p>
-          <TagList tags={p.data.tags} />
+          <h2>{data.title}</h2>
+          <p>{data.description}</p>
+          <p>
+            {data.liveUrl && <a href={data.liveUrl}>Live demo</a>}
+            {data.liveUrl && data.repoUrl && ' | '}
+            {data.repoUrl && <a href={data.repoUrl}>Source code</a>}
+          </p>
         </li>
       ))
     }
   </ul>
 </BaseLayout>
+
