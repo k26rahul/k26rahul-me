@@ -17,7 +17,7 @@ const posts = (await getCollection('blog', ({ data }) => !data.draft)).sort(
           <a href={`/blog/${p.id}`}>{p.data.title}</a>
           <time datetime={p.data.pubDate.toISOString()}> {p.data.pubDate.toISOString().slice(0, 10)}</time>
           <p>{p.data.description}</p>
-          <TopicList topics={p.data.tags} />
+          <TopicList topics={p.data.topics} />
         </li>
       ))
     }

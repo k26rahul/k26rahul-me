@@ -13,7 +13,7 @@ const links = await getCollection('bookmarks');
         <li>
           <a href={data.url}>{data.title}</a>
           {data.note && <p>{data.note}</p>}
-          <TopicList topics={data.tags} />
+          <TopicList topics={data.topics} />
         </li>
       ))
     }

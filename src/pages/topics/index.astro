@@ -7,7 +7,7 @@ const entries = await getCollection('blog', notDraft);
 
 const counts = new Map();
 for (const { data } of entries) {
-  for (const topic of data.tags) counts.set(topic, (counts.get(topic) ?? 0) + 1);
+  for (const topic of data.topics) counts.set(topic, (counts.get(topic) ?? 0) + 1);
 }
 const topics = [...counts.entries()].sort(([a], [b]) => a.localeCompare(b));
 ---

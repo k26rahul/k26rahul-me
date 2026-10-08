@@ -2,7 +2,7 @@
 title: Example Post 4
 description: Draft post for verification.
 pubDate: 2026-03-01
-tags: [general]
+topics: [general]
 draft: true
 ---
 

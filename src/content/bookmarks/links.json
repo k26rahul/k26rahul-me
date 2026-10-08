@@ -4,12 +4,12 @@
     "title": "Example Resource 1",
     "url": "https://example.com/1",
     "note": "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-    "tags": ["reference"]
+    "topics": ["reference"]
   },
   {
     "id": "example-2",
     "title": "Example Resource 2",
     "url": "https://example.com/2",
-    "tags": ["reference"]
+    "topics": ["reference"]
   }
 ]

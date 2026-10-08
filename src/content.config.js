@@ -7,7 +7,7 @@ const postSchema = z.object({
   description: z.string(),
   pubDate: z.coerce.date(),
   updatedDate: z.coerce.date().optional(),
-  tags: z.array(z.string()).default([]),
+  topics: z.array(z.string()).default([]),
   heroImage: z.string().optional(),
   draft: z.boolean().default(false),
 });
@@ -37,7 +37,7 @@ const bookmarks = defineCollection({
     title: z.string(),
     url: z.string().url(),
     note: z.string().optional(),
-    tags: z.array(z.string()).default([]),
+    topics: z.array(z.string()).default([]),
   }),
 });
 

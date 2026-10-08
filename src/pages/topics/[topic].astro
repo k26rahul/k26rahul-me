@@ -6,10 +6,10 @@ export async function getStaticPaths() {
   const notDraft = ({ data }) => !data.draft;
   const entries = await getCollection('blog', notDraft);
 
-  const topics = new Set(entries.flatMap((e) => e.data.tags));
+  const topics = new Set(entries.flatMap((e) => e.data.topics));
   return [...topics].map((topic) => ({
     params: { topic },
-    props: { entries: entries.filter((e) => e.data.tags.includes(topic)) },
+    props: { entries: entries.filter((e) => e.data.topics.includes(topic)) },
   }));
 }
 
