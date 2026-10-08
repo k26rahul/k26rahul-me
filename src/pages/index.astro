@@ -6,7 +6,9 @@ const byDate = (a, b) => b.data.pubDate - a.data.pubDate;
 const notDraft = ({ data }) => !data.draft;
 
 const blog = (await getCollection('blog', notDraft)).sort(byDate).slice(0, 3);
-const projects = (await getCollection('projects')).slice(0, 3);
+const allProjects = await getCollection('projects');
+const featuredProjects = allProjects.filter((p) => p.data.featured);
+const projects = (featuredProjects.length > 0 ? featuredProjects : allProjects).slice(0, 3);
 ---
 
 <BaseLayout title="Home" description="Portfolio and blog by Rahul.">

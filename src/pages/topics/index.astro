@@ -3,16 +3,20 @@ import { getCollection } from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 
 const notDraft = ({ data }) => !data.draft;
-const entries = await getCollection('blog', notDraft);
+const blogEntries = await getCollection('blog', notDraft);
+const projectEntries = await getCollection('projects');
 
 const counts = new Map();
-for (const { data } of entries) {
+for (const { data } of blogEntries) {
+  for (const topic of data.topics) counts.set(topic, (counts.get(topic) ?? 0) + 1);
+}
+for (const { data } of projectEntries) {
   for (const topic of data.topics) counts.set(topic, (counts.get(topic) ?? 0) + 1);
 }
 const topics = [...counts.entries()].sort(([a], [b]) => a.localeCompare(b));
 ---
 
-<BaseLayout title="Topics" description="All topics across blog posts.">
+<BaseLayout title="Topics" description="All topics across posts and projects.">
   <h1>Topics</h1>
   <ul>
     {

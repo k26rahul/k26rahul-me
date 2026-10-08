@@ -1,6 +1,7 @@
 ---
 import { getCollection } from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import TopicList from '../../components/TopicList.astro';
 
 const projects = await getCollection('projects');
 ---
@@ -13,6 +14,7 @@ const projects = await getCollection('projects');
         <li>
           <h2>{data.title}</h2>
           <p>{data.description}</p>
+          <TopicList topics={data.topics} />
           <p>
             {data.liveUrl && <a href={data.liveUrl}>Live demo</a>}
             {data.liveUrl && data.repoUrl && ' | '}

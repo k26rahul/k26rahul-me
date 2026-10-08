@@ -4,30 +4,61 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 
 export async function getStaticPaths() {
   const notDraft = ({ data }) => !data.draft;
-  const entries = await getCollection('blog', notDraft);
+  const blogEntries = await getCollection('blog', notDraft);
+  const projectEntries = await getCollection('projects');
 
-  const topics = new Set(entries.flatMap((e) => e.data.topics));
+  const topics = new Set([
+    ...blogEntries.flatMap((e) => e.data.topics),
+    ...projectEntries.flatMap((e) => e.data.topics),
+  ]);
+
   return [...topics].map((topic) => ({
     params: { topic },
-    props: { entries: entries.filter((e) => e.data.topics.includes(topic)) },
+    props: {
+      posts: blogEntries.filter((e) => e.data.topics.includes(topic)),
+      projects: projectEntries.filter((e) => e.data.topics.includes(topic)),
+    },
   }));
 }
 
 const { topic } = Astro.params;
-const { entries } = Astro.props;
+const { posts, projects } = Astro.props;
 ---
 
-<BaseLayout title={`#${topic}`} description={`Blog posts under topic ${topic}.`}>
+<BaseLayout title={`#${topic}`} description={`Content tagged #${topic}.`}>
   <h1>#{topic}</h1>
-  <ul>
-    {
-      entries
-        .sort((a, b) => b.data.pubDate - a.data.pubDate)
-        .map((e) => (
-          <li>
-            <a href={`/blog/${e.id}`}>{e.data.title}</a>
-          </li>
-        ))
-    }
-  </ul>
+
+  {
+    projects.length > 0 && (
+      <section>
+        <h2>Projects</h2>
+        <ul>
+          {projects.map(({ data }) => (
+            <li>
+              <strong>{data.title}</strong> - {data.description}
+              {data.liveUrl && <> (<a href={data.liveUrl}>demo</a>)</>}
+              {data.repoUrl && <> (<a href={data.repoUrl}>code</a>)</>}
+            </li>
+          ))}
+        </ul>
+      </section>
+    )
+  }
+
+  {
+    posts.length > 0 && (
+      <section>
+        <h2>Blog posts</h2>
+        <ul>
+          {posts
+            .sort((a, b) => b.data.pubDate - a.data.pubDate)
+            .map((e) => (
+              <li>
+                <a href={`/blog/${e.id}`}>{e.data.title}</a>
+              </li>
+            ))}
+        </ul>
+      </section>
+    )
+  }
 </BaseLayout>

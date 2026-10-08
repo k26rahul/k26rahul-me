@@ -3,8 +3,16 @@
   description: Lorem ipsum dolor sit amet, consectetur adipiscing elit.
   repoUrl: https://github.com/k26rahul/example-project-1
   liveUrl: https://example.com/example-project-1
+  featured: true
+  topics:
+    - machine-learning
+    - python
 
 - id: example-project-2
   title: Example Project 2
   description: Ut enim ad minim veniam, quis nostrud exercitation.
   repoUrl: https://github.com/k26rahul/example-project-2
+  featured: false
+  topics:
+    - web-development
+
