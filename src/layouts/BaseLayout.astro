@@ -5,7 +5,6 @@ import '@fontsource/jetbrains-mono/400.css';
 import '../styles/global.css';
 import '../styles/prose.css';
 import Nav from '../components/Nav.astro';
-import Sidebar from '../components/Sidebar.astro';
 import Footer from '../components/Footer.astro';
 
 const { title, description = 'Personal website of Rahul' } = Astro.props;
@@ -30,29 +29,24 @@ const fullTitle = title ? `${title} | k26rahul.me` : 'k26rahul.me';
   </head>
   <body>
     <Nav />
-    <div class="layout">
-      <Sidebar />
-      <main>
-        <slot />
-      </main>
-    </div>
+    <main id="main-content">
+      <slot />
+    </main>
     <Footer />
   </body>
 </html>
 
 <style>
-  .layout {
+  body {
+    min-height: 100vh;
     display: flex;
-    gap: 2rem;
-    padding: 1rem;
+    flex-direction: column;
   }
   main {
     flex: 1;
-    min-width: 0;
-  }
-  @media (max-width: 700px) {
-    .layout {
-      flex-direction: column;
-    }
+    width: 100%;
+    max-width: 48rem;
+    margin: 0 auto;
+    padding: 2rem 1rem;
   }
 </style>

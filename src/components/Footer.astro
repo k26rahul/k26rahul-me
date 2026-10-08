@@ -1,11 +1,59 @@
-<footer>
-  <p>&copy; {new Date().getFullYear()} Rahul - k26rahul.me</p>
+---
+const footerLinks = [
+  { label: 'Uses', href: '/uses' },
+  { label: 'Now', href: '/now' },
+  { label: 'Colophon', href: '/colophon' },
+];
+---
+
+<footer class="site-footer">
+  <div class="footer-container">
+    <nav class="footer-nav" aria-label="Footer navigation">
+      {footerLinks.map((link) => (
+        <a href={link.href} class="footer-link">{link.label}</a>
+      ))}
+    </nav>
+    <p class="copyright">&copy; {new Date().getFullYear()} Rahul - k26rahul.me</p>
+  </div>
 </footer>
 
 <style>
-  footer {
-    padding: 1rem;
+  .site-footer {
+    margin-top: auto;
     border-top: 1px solid var(--color-border);
+    padding: 2rem 1rem;
     color: var(--color-text-muted);
+    font-size: 0.9rem;
+  }
+
+  .footer-container {
+    max-width: 48rem;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    text-align: center;
+  }
+
+  .footer-nav {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1.5rem;
+  }
+
+  .footer-link {
+    color: var(--color-text-muted);
+    text-decoration: none;
+    transition: color 0.15s ease;
+  }
+
+  .footer-link:hover {
+    color: var(--color-text);
+  }
+
+  .copyright {
+    margin: 0;
   }
 </style>

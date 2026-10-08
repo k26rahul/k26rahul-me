@@ -1,9 +1,47 @@
-<button id="theme-toggle" type="button">Toggle theme</button>
+---
+import { Sun, Moon } from '@lucide/astro';
+---
+
+<button id="theme-toggle" class="theme-toggle" type="button" aria-label="Toggle color theme">
+  <Sun class="icon-sun" size={20} />
+  <Moon class="icon-moon" size={20} />
+</button>
 
 <script>
-  document.getElementById('theme-toggle').addEventListener('click', () => {
+  const toggle = document.getElementById('theme-toggle');
+  toggle?.addEventListener('click', () => {
     const next = document.documentElement.dataset.theme === 'dark' ? 'light' : 'dark';
     document.documentElement.dataset.theme = next;
     localStorage.setItem('theme', next);
   });
 </script>
+
+<style>
+  .theme-toggle {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.4rem;
+    border: 1px solid var(--color-border);
+    border-radius: 0.375rem;
+    background: transparent;
+    color: var(--color-text);
+    cursor: pointer;
+    transition: background-color 0.15s ease, border-color 0.15s ease;
+  }
+  .theme-toggle:hover {
+    background-color: var(--color-surface);
+  }
+  :global([data-theme='dark']) .icon-sun {
+    display: block;
+  }
+  :global([data-theme='dark']) .icon-moon {
+    display: none;
+  }
+  :global(:not([data-theme='dark'])) .icon-sun {
+    display: none;
+  }
+  :global(:not([data-theme='dark'])) .icon-moon {
+    display: block;
+  }
+</style>
