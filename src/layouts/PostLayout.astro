@@ -1,18 +1,18 @@
 ---
 import BaseLayout from './BaseLayout.astro';
 import TopicList from '../components/TopicList.astro';
+import { formatDate } from '../utils/date.js';
 
 const { title, description, pubDate, updatedDate, topics = [], heroImage } = Astro.props;
-const fmt = (d) => d.toISOString().slice(0, 10);
-const showUpdated = updatedDate && fmt(updatedDate) !== fmt(pubDate);
+const showUpdated = updatedDate && formatDate(updatedDate) !== formatDate(pubDate);
 ---
 
 <BaseLayout title={title} description={description}>
   <article>
     <h1>{title}</h1>
     <p>
-      <time datetime={pubDate.toISOString()}>{fmt(pubDate)}</time>
-      {showUpdated && <span> (updated <time datetime={updatedDate.toISOString()}>{fmt(updatedDate)}</time>)</span>}
+      <time datetime={pubDate.toISOString()}>{formatDate(pubDate)}</time>
+      {showUpdated && <span> (updated <time datetime={updatedDate.toISOString()}>{formatDate(updatedDate)}</time>)</span>}
     </p>
     <TopicList topics={topics} />
     {heroImage && <img class="hero-image" src={heroImage} alt="" />}

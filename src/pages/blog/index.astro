@@ -2,6 +2,7 @@
 import { getCollection } from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import TopicList from '../../components/TopicList.astro';
+import { formatDate } from '../../utils/date.js';
 
 const posts = (await getCollection('blog', ({ data }) => !data.draft)).sort(
   (a, b) => b.data.pubDate - a.data.pubDate,
@@ -15,7 +16,7 @@ const posts = (await getCollection('blog', ({ data }) => !data.draft)).sort(
       posts.map((p) => (
         <li>
           <a href={`/blog/${p.id}`}>{p.data.title}</a>
-          <time datetime={p.data.pubDate.toISOString()}> {p.data.pubDate.toISOString().slice(0, 10)}</time>
+          <time datetime={p.data.pubDate.toISOString()}> {formatDate(p.data.pubDate)}</time>
           <p>{p.data.description}</p>
           <TopicList topics={p.data.topics} />
         </li>

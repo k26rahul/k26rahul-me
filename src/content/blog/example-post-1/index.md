@@ -1,7 +1,7 @@
 ---
 title: Example Post 1
 description: Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-pubDate: 2026-01-10
+pubDate: "2026-10-07"
 topics: [general, notes]
 ---
 
