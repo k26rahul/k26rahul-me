@@ -8,7 +8,7 @@ Personal website and portfolio: [k26rahul.me](https://k26rahul.me)
 
 - **Framework**: [Astro](https://astro.build) (static output, plain JavaScript)
 - **Integrations**: `@astrojs/react`, `@astrojs/mdx`, `@astrojs/sitemap`
-- **Styling**: [Open Props](https://open-props.style)
+- **Styling**: Hand-written CSS with custom properties
 - **Fonts**: Inter and JetBrains Mono (via [Fontsource](https://fontsource.org))
 
 ## Commands

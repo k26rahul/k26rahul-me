@@ -1,5 +1,3 @@
-@import 'open-props/style';
-
 :root {
   --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   --font-mono: 'JetBrains Mono', monospace;
@@ -21,7 +19,9 @@
   --color-surface: #1e293b;
 }
 
-*, *::before, *::after {
+*,
+*::before,
+*::after {
   box-sizing: border-box;
 }
 
@@ -33,11 +33,11 @@ body {
   line-height: 1.6;
 }
 
-code, pre {
+code,
+pre {
   font-family: var(--font-mono);
 }
 
-/* Native cross-document view transitions without client-side routing runtime */
 @view-transition {
   navigation: auto;
 }
